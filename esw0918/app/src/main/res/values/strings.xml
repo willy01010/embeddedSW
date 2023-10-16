@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">esw0918</string>
+
+    <string-array name="country_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+    </string-array>
 </resources>

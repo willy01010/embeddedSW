@@ -1,10 +1,14 @@
 package com.example.esw0918;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.style.TabStopSpan;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
 
         // 如果要给多个 view 注册上下文菜单，可以根据 v 参数来判断
-
         MenuInflater inflator = new MenuInflater(this);
         inflator.inflate(R.menu.floatmenu, menu);
 
@@ -112,6 +115,24 @@ public class MainActivity extends AppCompatActivity {
     }
     //長按開啟上下文選單
 
+    public void CountrySelectAlertDialog (){
+        AlertDialog.Builder builder = new AlertDialog.Builder (MainActivity.this);
+
+
+        Resources res = getResources();
+        String[] Countrys = res.getStringArray(R.array.country_array);
+        builder.setTitle ("國家列表");
+        builder.setItems (Countrys, new DialogInterface.OnClickListener () {
+            @Override
+            public void onClick (DialogInterface dialogInterface, int i) {
+                Toast.makeText (MainActivity.this,"Now you selected Country is : "+Countrys[i],Toast.LENGTH_LONG).show ();
+//                Toast.makeText (MainActivity.this,"Now you selected Country is : ",Toast.LENGTH_LONG).show ();
+            }
+        });
+        builder.create ().show ();
+    }
+
+
         @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,9 +147,14 @@ public class MainActivity extends AppCompatActivity {
                 Toast toast = Toast.makeText(MainActivity.this,"我是吐司", Toast.LENGTH_SHORT);
                 toast.show();
 
+
+
             }
         });
         //按我
+
+
+
 
         //彈出式選單
         popbt = (Button) findViewById(R.id.popmanu);
@@ -167,6 +193,15 @@ public class MainActivity extends AppCompatActivity {
         registerForContextMenu(btn_float);
         //長按開啟上下文選單
 
+
+       Button btn_opt = (Button) findViewById(R.id.optionmenubt);
+       btn_opt.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Toast.makeText(MainActivity.this,"optbtn", Toast.LENGTH_SHORT);
+               CountrySelectAlertDialog ();
+           }
+       });
     }
 
 
